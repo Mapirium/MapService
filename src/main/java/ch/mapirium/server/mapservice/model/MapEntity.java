@@ -19,12 +19,12 @@ public class MapEntity extends PublicIdEntity {
 
     @Column(name = "name", unique = true, nullable = false)
     @NotNull
-    @Size(max = 50)
+    @Size(min = 3, max = 50)
     private String name;
 
     @Column(name = "title", unique = false, nullable = false)
     @NotNull
-    @Size(max = 50)
+    @Size(min = 1, max = 50)
     private String title;
 
     public String getName() {

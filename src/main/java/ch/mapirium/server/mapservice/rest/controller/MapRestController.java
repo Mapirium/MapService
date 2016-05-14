@@ -9,6 +9,7 @@ import ch.mapirium.server.mapservice.rest.model.MapResource;
 import ch.mapirium.server.mapservice.rest.model.PublicIdResource;
 import ch.mapirium.server.mapservice.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class MapRestController {
     private MapService mapService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public MapResource createMap(@RequestBody MapResource newMap) {
+    public MapResource createMap(@Validated @RequestBody MapResource newMap) {
         // Entität erstellen
         MapEntity entity = mapMapper.toEntity(newMap);
 

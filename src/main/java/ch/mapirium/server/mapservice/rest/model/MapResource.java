@@ -2,6 +2,7 @@ package ch.mapirium.server.mapservice.rest.model;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -13,8 +14,10 @@ public class MapResource extends ResourceSupport {
 
     private Date createdAt;
 
+    @Size(min = 3, max = 50)
     private String name;
 
+    @Size(min = 1, max = 50)
     private String title;
 
     public String getPublicId() {
