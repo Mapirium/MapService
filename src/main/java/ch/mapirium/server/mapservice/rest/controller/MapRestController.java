@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST-Schnittstelle für die Karte
@@ -52,11 +54,7 @@ public class MapRestController {
         Iterable<MapEntity> all = mapRepository.findAll();
 
         // Mappen
-        List<MapResource> result = new ArrayList<>();
-        for (MapEntity mapEntity : all) {
-            MapResource mapResource = mapMapper.fromEntity(mapEntity);
-            result.add(mapResource);
-        }
+        List<MapResource> result = StreamSupport.stream(all.spliterator(), true).map(mapMapper::fromEntity).collect(Collectors.toList());
 
         return result;
     }
