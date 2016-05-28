@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
- * Created by surech on 08.05.16.
+ * Repository für den Zugriff auf die Karten
  */
 public interface MapRepository extends CrudRepository<MapEntity, Long> {
 
