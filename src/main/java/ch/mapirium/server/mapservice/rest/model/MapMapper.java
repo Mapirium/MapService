@@ -3,6 +3,8 @@ package ch.mapirium.server.mapservice.rest.model;
 import ch.mapirium.server.mapservice.model.MapEntity;
 import ch.mapirium.server.mapservice.rest.controller.MapRestController;
 import ch.mapirium.server.mapservice.rest.model.MapResource;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -22,6 +24,7 @@ public class MapMapper {
         result.setCreatedAt(entity.getCreatedAt());
 
         result.add(linkTo(methodOn(MapRestController.class).getMapByPublicId(entity.getPublicId())).withSelfRel());
+        result.add(new Link("/map/" + entity.getPublicId() + "/pointdefinition", "pointdefinitions"));
 
         return result;
     }
