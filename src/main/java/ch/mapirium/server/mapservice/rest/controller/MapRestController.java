@@ -4,18 +4,11 @@ import ch.mapirium.server.common.springmvc.exceptions.NotFoundException;
 import ch.mapirium.server.mapservice.model.MapEntity;
 import ch.mapirium.server.mapservice.repo.MapRepository;
 import ch.mapirium.server.mapservice.rest.gateway.PublicIdGateway;
-import ch.mapirium.server.mapservice.rest.model.MapMapper;
-import ch.mapirium.server.mapservice.rest.model.MapResource;
-import ch.mapirium.server.mapservice.rest.model.PublicIdResource;
+import ch.mapirium.server.mapservice.rest.model.*;
 import ch.mapirium.server.mapservice.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST-Schnittstelle für die Karte
@@ -34,6 +27,9 @@ public class MapRestController {
     private MapMapper mapMapper;
 
     @Autowired
+    private MapListMapper mapListMapper;
+
+    @Autowired
     private MapService mapService;
 
     @RequestMapping(method = RequestMethod.POST)
@@ -50,12 +46,12 @@ public class MapRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<MapResource> getAll() {
+    public MapListResource getAll() {
         // Alle karten laden
         Iterable<MapEntity> all = mapRepository.findAll();
 
         // Mappen
-        List<MapResource> result = StreamSupport.stream(all.spliterator(), true).map(mapMapper::fromEntity).collect(Collectors.toList());
+        MapListResource result = mapListMapper.fromEntity(all);
 
         return result;
     }
