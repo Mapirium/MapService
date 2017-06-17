@@ -25,6 +25,7 @@ public class MapMapper {
 
         result.add(linkTo(methodOn(MapRestController.class).getMapByPublicId(entity.getPublicId())).withSelfRel());
         result.add(new Link("/map/" + entity.getPublicId() + "/pointdefinition", "pointdefinitions"));
+        result.add(new Link("/map/" + entity.getPublicId() + "/point", "points"));
 
         return result;
     }

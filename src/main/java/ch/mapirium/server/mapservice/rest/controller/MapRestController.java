@@ -56,7 +56,7 @@ public class MapRestController {
         return result;
     }
 
-    @RequestMapping(path = "/id/{publicId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{publicId}", method = RequestMethod.GET)
     public MapResource getMapByPublicId(@PathVariable("publicId") String publicId){
         // Karte suchen
         MapEntity entity = mapRepository.findByPublicId(publicId);
@@ -73,7 +73,7 @@ public class MapRestController {
     @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
     public MapResource getMapByName(@PathVariable("name") String name){
         // Karte suchen
-        MapEntity entity = mapRepository.findByPublicId(name);
+        MapEntity entity = mapRepository.findByName(name);
 
         // Wenn wir nichts gefunden haben, geben wir einen Fehler zurück
         if (entity == null) {
