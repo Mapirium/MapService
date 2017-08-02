@@ -26,7 +26,7 @@ public class MapListMapper {
         result.add(linkTo(methodOn(MapRestController.class).getAll()).withSelfRel());
 
         // Die einzelnen Entitäten mappen
-        List<MapResource> mapResources = StreamSupport.stream(entities.spliterator(), true).map(mapMapper::fromEntity).collect(Collectors.toList());
+        List<MapResource> mapResources = StreamSupport.stream(entities.spliterator(), false).map(mapMapper::fromEntity).collect(Collectors.toList());
         result.embed("maps", mapResources);
 
         return result;
